@@ -1,6 +1,8 @@
 package com.example.jpa;
 
+import com.example.jpa.db.models.Course;
 import com.example.jpa.db.models.Student;
+import com.example.jpa.repositories.CourseRepository;
 import com.example.jpa.repositories.StudentRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
@@ -19,7 +21,7 @@ public class JpaApplication {
     }
 
     @Bean
-    CommandLineRunner commandLineRunner(StudentRepository repository){
+    CommandLineRunner commandLineRunner(StudentRepository repository, CourseRepository courseRepository){
         return args -> {
             Student vijay  = new Student();
             vijay.setFirstName("Vijay");
@@ -28,6 +30,12 @@ public class JpaApplication {
             vijay.setEmail("vijay@example.com");
             repository.save(vijay);
             log.info("Student saved : id = "+vijay.getId());
+
+            Course java = new Course();
+            java.setCourseName("Java");
+            java.setStudent(vijay);
+            courseRepository.save(java);
+
         };
     }
 }
