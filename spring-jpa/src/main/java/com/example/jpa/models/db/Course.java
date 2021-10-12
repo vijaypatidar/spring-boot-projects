@@ -1,4 +1,4 @@
-package com.example.jpa.db.models;
+package com.example.jpa.models.db;
 
 import javax.persistence.*;
 

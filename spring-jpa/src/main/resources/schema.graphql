@@ -1,0 +1,20 @@
+type Student{
+    id:Int,
+    firstName:String
+    lastName:String
+    email:String
+    age:Int
+}
+
+type Course{
+    id:Int,
+    courseName:String,
+    student_id:String
+}
+
+type Query{
+    getStudents:[Student],
+    getStudent(id:Int):Student,
+    getCourses:[Course],
+    getCourse(id:String):Course
+}
