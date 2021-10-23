@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -15,7 +15,7 @@ import java.util.Date;
 public class Note {
     @Id
     private String id;
-    private Date createdOn;
+    private LocalDateTime createdOn;
     private String title;
     private String description;
 

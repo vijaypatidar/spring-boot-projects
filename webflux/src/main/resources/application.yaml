@@ -2,5 +2,5 @@ spring:
   data:
     mongodb:
       database: note
-      uri: mongodb://root:admin@localhost:27017/
+      uri: mongodb://${MONGO_DB_USER:root}:${MONGO_DB_ADMIN:admin}@localhost:27017/
 

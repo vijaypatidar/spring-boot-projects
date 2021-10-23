@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.stream.IntStream;
 
 @SpringBootApplication
@@ -26,7 +26,7 @@ public class WebfluxApplication {
                 .iterate(1, value -> value + 1)
                 .limit(100).mapToObj(n -> new Note(
                         n + "",
-                        new Date(),
+                        LocalDateTime.now(),
                         "Title" + n,
                         "This is dummy"
                 ))
