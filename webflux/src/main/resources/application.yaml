@@ -1,0 +1,6 @@
+spring:
+  data:
+    mongodb:
+      database: note
+      uri: mongodb://root:admin@localhost:27017/
+
