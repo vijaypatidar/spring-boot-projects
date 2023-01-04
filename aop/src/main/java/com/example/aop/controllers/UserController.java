@@ -1,12 +1,13 @@
 package com.example.aop.controllers;
 
-import com.example.aop.apsect.Loggable;
+import com.example.aop.apsect.logger.Log;
+import com.example.aop.apsect.timed.Timed;
 import com.example.aop.models.User;
 import com.example.aop.services.UserService;
+import java.util.List;
+import javax.management.ServiceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RequestMapping("/users")
 @RestController
@@ -17,24 +18,26 @@ public class UserController {
         this.userService = userService;
     }
 
-    @Loggable(description = "New user creation request")
     @PostMapping
+    @Timed(description = "users.add.user")
     public ResponseEntity<String> addUser(@RequestBody User user) {
         userService.addUser(user);
         return ResponseEntity.ok("User add " + user.getName());
     }
 
     @GetMapping("/{email}")
+    @Timed(description = "users.getBy.email")
     public User getUserById(@PathVariable String email) {
         return userService.getUser(email);
     }
 
     @GetMapping()
-    public List<User> getUsers() {
+    @Timed(description = "users.get.user")
+    public List<User> getUsers() throws ServiceNotFoundException {
         return userService.getUsers();
     }
 
-    @Loggable(description = "User delete request")
+    @Log(description = "User delete request")
     @DeleteMapping("/{email}")
     public ResponseEntity<String> deleteUser(@PathVariable String email) {
         userService.deleteUser(email);

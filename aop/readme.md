@@ -41,17 +41,17 @@ public class LoggerAspect {
 
     private final Logger logger = LoggerFactory.getLogger(LoggerAspect.class);
 
-    @Around("@annotation(loggable))")
-    public Object run(ProceedingJoinPoint point, Loggable loggable) {
+    @Around("@annotation(log))")
+    public Object run(ProceedingJoinPoint point, Loggable log) {
         try {
             //save log some where in persist db
             logger.info(
-                    point.getSignature().getName() + " called with args " + Arrays.stream(point.getArgs()).collect(Collectors.toList()) + ", Description = " + loggable.description()
+                    point.getSignature().getName() + " called with args " + Arrays.stream(point.getArgs()).collect(Collectors.toList()) + ", Description = " + log.description()
             );
             //proceed methods execution
             Object res = point.proceed();
             logger.debug(
-                    point.getSignature().getName() + " executed successfully : " + loggable.description()
+                    point.getSignature().getName() + " executed successfully : " + log.description()
             );
             return res;
         } catch (Throwable e) {
@@ -85,5 +85,9 @@ public class UserController {
 
     //...
 }
-
 ```
+
+## Things we can do with AOP
+1. Retry mechanism : Faults are common in software, but it's our responsibility to deal with them to make our application fault tolerance. 
+2. Caching: It's common and good practice to store results of expensive operation that is required frequently. Using AOP we can create caching tool with annotation, this will help us to remove the duplicate logic by just annotating the method.
+3. Metric collection: We want our application to be reliable. It should serve the request in minimum time(latency should be small) and for this we need to keep eye on our metric. Using AOP we can easily record the time taken by methods without even changing their definition and respecting the SRP of each method. 

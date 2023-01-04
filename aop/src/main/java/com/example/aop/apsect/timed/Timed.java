@@ -1,9 +1,9 @@
-package com.example.aop.apsect;
+package com.example.aop.apsect.timed;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Loggable {
+public @interface Timed {
     String description();
 }
