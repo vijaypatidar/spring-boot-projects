@@ -1,4 +1,5 @@
 # Spring Boot AOP
+The AOP (Aspect Oriented Programming) part of Spring supports unified development by ensuring separation of application’s business logic from other system services.
 
 1. Add spring AOP dependency
 
